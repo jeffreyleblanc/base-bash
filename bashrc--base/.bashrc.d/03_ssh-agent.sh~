@@ -1,0 +1,16 @@
+
+
+# Something seems to be starting `ssh-agent -s` in background
+# We'd rather manage ourselves, so kill it if it's there
+pkill -f "ssh-agent -s"
+
+# start ssh-agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    echo "Setting up ssh-agent"
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    echo "Using existing ssh-agent"
+    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
+fi
+# end start ssh agent

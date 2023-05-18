@@ -1,0 +1,20 @@
+
+
+# Examples
+## function stest(){ echo "${@:2}"; }
+
+
+jhelp() {
+echo "
+Commands available:
+
+yadd     Load yubikey into ssh-agent
+yrem     Remove yubikey from ssh-agent
+"
+}
+
+function line(){
+    printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' - ;
+}
+
+
